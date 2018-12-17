@@ -9,6 +9,8 @@ from helpers import *
 # configure application
 app = Flask(__name__)
 
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///finance.db'
+
 # ensure responses aren't cached
 if app.config["DEBUG"]:
     @app.after_request
@@ -26,6 +28,7 @@ app.config["SESSION_FILE_DIR"] = gettempdir()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
 
 # configure CS50 Library to use SQLite database
 db = SQL("sqlite:///finance.db")
@@ -307,3 +310,10 @@ def loan():
 
     else:
         return render_template("loan.html")
+
+
+
+
+if __name__=="__main__":
+    app.debug = True
+    app.run()
